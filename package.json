@@ -1,0 +1,17 @@
+{
+  "name": "evercloud",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EverCloud agency website: static front end + Cloudflare Worker API + D1 database",
+  "scripts": {
+    "dev": "wrangler dev",
+    "db:local": "wrangler d1 execute evercloud-db --local --file=./schema.sql",
+    "db:remote": "wrangler d1 execute evercloud-db --remote --file=./schema.sql",
+    "deploy": "wrangler deploy",
+    "orders": "wrangler d1 execute evercloud-db --remote --command \"SELECT ref, created_at, name, email, package, due_today, monthly, pay_method, status FROM orders ORDER BY created_at DESC LIMIT 20\""
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

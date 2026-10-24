@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "evercloud",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+
+  // The website files (everything in /public) are served from Cloudflare's network.
+  // Only /api/* runs your Worker code.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+
+  // The database. After `npx wrangler d1 create evercloud-db`, paste the printed database_id below.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "evercloud-db",
+      "database_id": "PASTE-YOUR-DATABASE-ID-HERE"
+    }
+  ],
+
+  "observability": { "enabled": true }
+}
